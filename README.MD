@@ -13,9 +13,13 @@ Ce projet consiste en un script de scraping qui permet de récupérer diverses d
 
 1. Cloner le dépôt : `git clone https://github.com/HelloVad/book2scrape.git`
 2. Accéder au répertoire du projet : `cd BookToScrape`
-3. Installer les dépendances requises : `pip install -r requirements.txt`
-4. Exécuter le script : `python scrape.py`
-5. Les données seront extraites et enregistrées dans des fichiers de sortie au format CSV.
+3. Créer un environnement virtuel (venv) pour isoler les dépendances du projet : `python -m venv venv`
+4. Activer l'environnement virtuel :
+   - Sur Windows : `venv\Scripts\activate`
+   - Sur macOS et Linux : `source venv/bin/activate`
+5. Installer les dépendances requises : `pip install -r requirements.txt`
+6. Exécuter le script : `python scrape.py`
+7. Les données seront extraites et enregistrées dans des fichiers de sortie au format CSV.
 
 N'hésitez pas à explorer les options disponibles dans le script pour personnaliser les informations que vous souhaitez extraire du site.
 

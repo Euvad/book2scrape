@@ -24,29 +24,26 @@ def get_category_links(soup):
 
 # Obtient les liens des livres d'une catégorie spécifique
 def get_books_links(category_link):
-    session = requests.Session()
     page_number = 1
     books_links = []
+
     while True:
         page_url = category_link.replace("index.html", f"page-{page_number}.html") if page_number > 1 else category_link
-        response = session.get(page_url)
-        if response.status_code == 200:
-            soup = BeautifulSoup(response.content, "html.parser")
+        soup = get_soup(page_url)  # Utilisation de la fonction get_soup pour obtenir le contenu HTML de la page.
+
+        if soup:
             link_elements = soup.select("h3 > a")
-            books_links.extend(BASE_URL + link_element["href"].replace("../../../", "catalogue/").replace("../../", "catalogue/") for link_element in link_elements)
+            books_links.extend([BASE_URL + link_element["href"].replace("../../../", "catalogue/").replace("../../", "catalogue/") for link_element in link_elements])
             page_number += 1
-        elif response.status_code == 404 or page_number > 1:
-            break
         else:
-            print("Erreur de requête :", response.status_code)
             break
+
     return books_links
 
 
 # Extrait les données d'un livre à partir de son URL
 def extract_product_data(product_page_url):
-    response = requests.get(product_page_url)
-    soup = BeautifulSoup(response.text, "html.parser")
+    soup = get_soup(product_page_url)
 
     product_page_url
     upc = soup.find('th', string='UPC').find_next('td').text
