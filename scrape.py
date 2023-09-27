@@ -18,7 +18,7 @@ def get_soup(url):
 
 # Obtient les liens des catégories à partir de l'objet BeautifulSoup et de l'URL de base
 def get_category_links(soup):
-    category_links = [BASE_URL + link_element["href"] for link_element in soup.select('ul li a[href*="category/books"]')]
+    category_links = [BASE_URL + link_element["href"] for link_element in soup.select('ul:not([class]) li a[href*="category/books"]')]
     return category_links
 
 
